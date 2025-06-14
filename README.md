@@ -40,11 +40,11 @@
 - Easily test the integration using sandbox credentials from the [PayPal Developer Dashboard](https://developer.paypal.com/).
 
 ## 📸 Screenshots
-![Home Page](assets/screenshots/home.png)
-![Login Page](assets/screenshots/login.png)
-![Admin Panel](assets/screenshots/admin-panel.png)
-![Product List](assets/screenshots/products.png)
-![User Dashboard Page](assets/screenshots/user-dash.png)
+![Home Page](assests/screenshots/home.png)
+![Login Page](assests/screenshots/login.png)
+![Admin Panel](assests/screenshots/admin-panel.png)
+![Product List](assests/screenshots/products.png)
+![User Dashboard Page](assests/screenshots/user-dash.png)
 
 
 ## ⚙️ Setup Instructions
