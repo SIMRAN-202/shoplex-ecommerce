@@ -1,0 +1,159 @@
+
+<%- include('header') %>
+<%- include('navbar') %>
+
+
+
+<div class="home-section">
+  <div class="left-column">
+    <div class="top-row">
+      <h2>Discover Sustainable Fashion</h2>
+      <p>Discover a world of sustainable fashion and unique vintage treasures at R. Miller.</p>
+      <a href="/login">
+        <button class="small-btn update-btn">Explore more</button>
+      </a>
+    </div>
+   
+  </div>
+
+  <div class="vertical-divider"></div>
+
+  <div class="right-column">
+    <img src="../public/images/home2.jpg" alt="Right Image">
+  </div>
+</div>
+
+
+
+
+<section class="about">
+  <h2>About</h2>
+  <h5>Our Story</h5>
+  <p>At R. Miller, we curate pre-loved apparel and home goods to offer affordable, sustainable fashion choices. Our rotating inventory includes designer clothing, vintage accessories, and charming home décor pieces. Embrace conscious consumption and the beauty of upcycled treasures with us.</p>
+  <a href="/about"><button  class="small-btn update-btn">Learn More</button></a>
+</section>
+
+<section class="third-left  home-img">
+  <img src="../public/images/home1.png" alt="image" class="zoom-image">
+</section>
+
+<section class="collection-section">
+  <h2>Our Collection Gallery</h2>
+  <p>Discover Our Treasures</p>
+  <div class="slider-container">
+  <div class="slider-track" id="sliderTrack">
+    <% data.forEach(product => { %>
+      <div class="slider-card">
+        <img src="../public/product_image/<%= product.image_url %>" alt="<%= product.name %>" class="slider-img">
+        <a href="#home-modal-<%= product.id %>" class="view-btn" data-modal-id="home-modal-<%= product.id %>">Quick view</a>
+      </div>
+    <% }) %>
+  </div>
+</div>
+<a href="/login" class="shop-btn-link"><button class="small-btn update-btn shop-btn">Shop Now</button></a>
+</section>
+<% data.forEach(product => { %>
+<div id="home-modal-<%= product.id %>" class="home-modal">
+  <div class="home-modal-content">
+    <span class="home-modal-close-btn">&times;</span>
+    <div class="home-modal-body">
+       
+      <div class="home-modal-image">
+        <img src="../public/product_image/<%= product.image_url %>" alt="Product Image" id="home-modal-product-image" />
+      </div>
+      <div class="home-modal-details">
+        <h3 id="home-modal-product-title"><%= product.name %></h3>
+        <p id="home-modal-product-desc"><%= product.description %></p>
+        <p id="home-modal-product-price">Rs. <%= product.price %></p>
+
+        <button id="home-modal-add-to-cart-btn" class="home-modal-btn">Add to Cart</button>
+        <a href="/login"><button id="home-modal-buy-now-btn" class="home-modal-btn">Buy Now</button></a>
+      </div>
+    </div>
+    
+  </div>
+  
+</div>
+<% }) %>
+
+<section class="offers-section">
+  <div class="offer-strip">
+    <div class="offer-track">
+      <span><i class="bi bi-arrow-down-left"></i> Free Shipping on Orders over 50 Rs. &nbsp;&nbsp;&nbsp;</span>
+      <span><i class="bi bi-arrow-down-left"></i> Free Shipping on Orders over 50 Rs. &nbsp;&nbsp;&nbsp;</span>
+      <span><i class="bi bi-arrow-down-left"></i> Free Shipping on Orders over 50 Rs. &nbsp;&nbsp;&nbsp;</span>
+      <span><i class="bi bi-arrow-down-left"></i> Free Shipping on Orders over 50 Rs. &nbsp;&nbsp;&nbsp;</span>
+      
+      <!-- Duplicate content to make loop smooth -->
+      <span><i class="bi bi-arrow-down-left"></i> Free Shipping on Orders over 50 Rs. &nbsp;&nbsp;&nbsp;</span>
+      <span><i class="bi bi-arrow-down-left"></i> Free Shipping on Orders over 50 Rs. &nbsp;&nbsp;&nbsp;</span>
+      <span><i class="bi bi-arrow-down-left"></i> Free Shipping on Orders over 50 Rs. &nbsp;&nbsp;&nbsp;</span>
+      <span><i class="bi bi-arrow-down-left"></i> Free Shipping on Orders over 50 Rs. &nbsp;&nbsp;&nbsp;</span>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section">
+  <div class="contact-container">
+    <div class="contact-left">
+      <h2>Get In Touch</h2>
+      <p>Discover pre-loved fashion treasures! Connect with us to find your perfect second-hand style at amazing prices</p>
+    </div>
+    <div class="contact-right">
+      <form class="contact-form" style="max-width: 800px; margin: 30px auto;">
+   
+    <div class="contact-form-group">
+      <label for="firstname" class="form-label">First Name</label>
+      <input type="text" id="firstname" name="firstname" class="form-input" required />
+    </div>
+
+    <div class="contact-form-group">
+      <label for="lastname" class="form-label">Last Name</label>
+      <input type="text" id="lastname" name="lastname" class="form-input" required />
+    </div>
+
+    <div class="contact-form-group">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" id="email" name="email" class="form-input" required />
+    </div>
+
+    <div class="contact-form-group">
+      <label for="message" class="form-label">Message</label>
+      <textarea id="message" name="message" rows="5" class="form-textarea" required></textarea>
+    </div>
+
+    <div class="form-full-width btn-group-right">
+      <button type="reset" class="small-btn discard-btn">Clear</button>
+      <button type="submit" class="small-btn update-btn">Send Message</button>
+    </div>
+  </form>
+    </div>
+  </div>
+</section>
+
+<section class="inquiry-section">
+  <h2>Common Inquiries Answered</h2>
+  <div class="inquiry-container">
+    <div class="inquiry-left">Shipping and Returns</div>
+    <div class="inquiry-right">Our shipping is fast and reliable, ensuring your treasures reach you promptly. Returns are hassle-free, making your shopping experience smooth and convenient.</div>
+  </div>
+  <div class="inquiry-container">
+    <div class="inquiry-left">Product Availability</div>
+    <div class="inquiry-right">
+We regularly update our inventory to offer you a fresh selection of items. If you can't find something specific, feel free to contact us, and we'll assist you in your search.</div>
+  </div>
+  <div class="inquiry-container">
+    <div class="inquiry-left">Sustainability Practices</div>
+    <div class="inquiry-right">
+At R. Miller, sustainability is at the core of what we do. We promote upcycling, conscious consumption, and a commitment to reducing fashion waste. Our practices aim to give new life to pre-loved items and contribute to a greener future</div>
+  </div>
+</section>
+
+
+<%- include('footer') %>
+<%- include('footer-links') %>
+
+
+
+
+

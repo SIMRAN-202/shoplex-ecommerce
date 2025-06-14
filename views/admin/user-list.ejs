@@ -1,0 +1,55 @@
+<%- include('../header') %>
+<%- include('admin-navbar') %>
+
+<div class="admin-container">
+  <div class="admin-page-header">
+    <h2>User List</h2>
+  </div>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Photo</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Gender</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(user => { %>
+        <tr>
+          <td><%= user.id %></td>
+          <td>
+            <% if (user.photo) { %>
+              <img src="../../public/profile_image/<%= user.photo %>" alt="User" class="product-img">
+            <% } else { %>
+              <span>No Photo</span>
+            <% } %>
+          </td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.mobile || 'N/A' %></td>
+          <td><%= user.gender || 'N/A' %></td>
+          <td><%= user.status === 1 ? "Active" : "Blocked" %></td>
+          <td>
+            <% if (user.status === 1) { %>
+              <form action="/admin/user/block/<%= user.id %>" method="POST" style="display:inline;">
+                <button class="btn-block .btn-action" onclick="return confirm('Block this user?')">Block</button>
+              </form>
+            <% } else { %>
+              <form action="/admin/user/unblock/<%= user.id %>" method="POST" style="display:inline;">
+                <button class="btn-unblock .btn-action" onclick="return confirm('Unblock this user?')">Unblock</button>
+              </form>
+            <% } %>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../footer') %>

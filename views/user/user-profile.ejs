@@ -1,0 +1,75 @@
+<%- include('../header') %>
+<%- include('user-navbar') %>
+
+
+<div class="profile-page">
+<section class="profile-overview">
+
+  <!-- Profile Photo (left) -->
+  <div class="profile-photo-section">
+    <img src="../../public/profile_image/<%= photo %>" alt="User Photo" class="dashboard-profile-photo">
+  </div>
+
+  <!-- Profile Info (right) -->
+  <div class="profile-info-section">
+<h1><%= name %></h1>
+<p><strong>Email:</strong> <%= email %></p>
+<p><strong>Mobile:</strong> <%= mobile %></p>
+<p><strong>Gender:</strong> <%= gender %></p>
+<p><strong>Address:</strong> <%= address %></p>
+<a href="/user/edit-profile"><button>Edit Profile</button></a>
+<a href="/logout" class="logout-button">Logout</a>
+
+  </div>
+</section>
+<hr class="horizontal" />
+<section class="address-section">
+  <!-- Referral & Newsletter/Notifications - Side by Side -->
+  <div class="referral-newsletter-container">
+    <!-- Referral Section -->
+    <div class="referral-section">
+      <p><strong>Referral Code:</strong> <code>THRIFT1234</code></p>
+      <button class="btn-invite">Invite Friends</button>
+      <p class="loyalty-tier"><strong>Loyalty Tier:</strong> <span class="gold-badge">Gold Member ⭐</span></p>
+    </div>
+
+    <!-- Preferences Section (Newsletter & Notifications) -->
+    <div class="preferences-section">
+  <div class="toggle-item">
+    <label for="newsletterToggle"><strong>Newsletter:</strong></label>
+    <label class="switch">
+      <input type="checkbox" id="newsletterToggle" checked>
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+  <div class="toggle-item">
+    <label for="notificationsToggle"><strong>Notifications:</strong></label>
+    <label class="switch">
+      <input type="checkbox" id="notificationsToggle" checked>
+      <span class="slider round"></span>
+    </label>
+  </div>
+</div>
+  </div>
+<hr class="horizontal" />
+  <!-- Address Book -->
+  <div class="address-book-section">
+    <h3>Saved Addresses</h3>
+    <div class="saved-address">
+      <strong>Home:</strong> 123 Street, City, Country
+    </div>
+    <div class="saved-address">
+      <strong>Work:</strong> 45 Office Lane, City, Country
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="profile-action-buttons">
+    <a href="/user/change-password" class="btn-password">Change Password</a>
+  </div>
+</section>
+
+</div>
+<%- include('../footer') %>
+<%- include('../footer-links') %>

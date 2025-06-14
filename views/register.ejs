@@ -1,0 +1,83 @@
+<%- include('header') %>
+<%- include('navbar') %>
+
+<div class="register-container">
+  <div class="register-image-side">
+    <img src="../public/images/shopping-cart.jpg" alt="Register Image" style="object-fit:fill;">
+  </div>
+  <div class="register-form-side">
+    <h2 class="register-title">Create Your Account</h2>
+    <p class="register-subtitle">Fill in the details below to register.</p>
+
+
+    <% if (locals.result) { %>
+      <p class="register-message"><%= result %></p>
+    <% } %>
+
+    <form action="/register" method="post" enctype="multipart/form-data" class="register-form">
+      <div class="register-grid">
+        <div class="register-group">
+          <label for="name">Full Name *</label>
+          <input type="text" name="name" >
+          <span class="error-msg"></span>
+
+        </div>
+        <div class="register-group">
+          <label for="email">Email *</label>
+          <input type="email" name="email" >
+          <span class="error-msg"></span>
+
+        </div>
+        <div class="register-group">
+          <label for="mobile">Mobile Number *</label>
+          <input type="text" name="mobile" >
+          <span class="error-msg"></span>
+
+        </div>
+        <div class="register-group">
+          <label for="gender">Gender *</label>
+          <select name="gender" >
+            <option value="">Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <span class="error-msg"></span>
+
+        </div>
+        
+        <div class="register-group">
+          <label for="password1">Password *</label>
+          <input type="password" name="password1" >
+          <span class="error-msg"></span>
+
+        </div>
+        <div class="register-group">
+          <label for="password2">Confirm Password *</label>
+          <input type="password" name="password2" >
+          <span class="error-msg"></span>
+
+        </div>
+        <div class="register-group register-photo">
+          <label for="photo">Upload Photo *</label>
+          <input type="file" name="photo">
+          <span class="error-msg"></span>
+
+        </div>
+        <div class="register-group register-address">
+          <label for="address">Address *</label>
+          <textarea name="address" rows="3" ></textarea>
+          <span class="error-msg"></span>
+
+        </div>
+      </div>
+      <button type="submit" class="register-btn">Register</button>
+    </form>
+
+    <hr class="register-divider">
+    <p class="register-footer">Already have an account? <a href="/login">Login here</a></p>
+
+    
+  </div>
+</div>
+
+<%- include('footer-links') %>

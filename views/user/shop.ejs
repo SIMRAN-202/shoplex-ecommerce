@@ -1,0 +1,68 @@
+<%- include('../header') %>
+<%- include('user-navbar') %>
+
+
+<div class="shop-container">
+
+  <!-- Sidebar -->
+<div class="shop-sidebar">
+  <h3>Browse By - </h3>
+  <hr class="horizontal" />
+  <ul class="shop-category-list">
+    <li>
+      <a href="/shop" class="shop-category-link <%= !selectedCategory ? 'active' : '' %>">All</a>
+    </li>
+    <% categories.forEach(category => { %>
+      <li>
+        <a href="/shop?category=<%= category.id %>" 
+           class="shop-category-link <%= selectedCategory == category.id ? 'active' : '' %>">
+          <%= category.name %>
+        </a>
+      </li>
+    <% }) %>
+  </ul>
+</div>
+
+
+<div class="shop-main">
+  <h2>Product List</h2>
+  <hr class="horizontal" />
+
+<div class="shop-product-grid">
+  <% data.forEach(product => { %>
+    <div class="shop-card">
+      <!-- Product Image -->
+      <img src="../public/product_image/<%= product.image_url %>" alt="<%= product.name %>" class="shop-card-img">
+
+      <!-- Title + Heart -->
+      <div class="shop-card-title-wrapper">
+        <h4 class="shop-card-title"><%= product.name.length > 17 ? product.name.substring(0, 17) + '...' : product.name %></h4>
+
+        <!-- Wishlist Heart -->
+        <form action="/add-to-wishlist" method="POST" class="wishlist-form" data-product-id="<%= product.id %>">
+          <input type="hidden" name="product_id" value="<%= product.id %>">
+          <button type="submit" class="wishlist-btn" title="Add to Wishlist">
+            <i class="bi bi-heart"></i>
+          </button>
+        </form>
+      </div>
+
+   
+
+      <!-- Price -->
+      <p class="shop-price"> ₹<%= product.price %></p>
+
+      <!-- View Button -->
+      <button class="shop-cart-btn">Add to Cart</button>
+      <a href="/brief_product?pid=<%=product.id%>"><button class="shop-buy-btn">Buy Now</button></a>
+    </div>
+  <% }) %>
+</div>
+
+
+
+</div>
+
+
+
+<%- include('../footer-links') %>

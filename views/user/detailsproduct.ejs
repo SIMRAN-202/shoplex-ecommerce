@@ -1,0 +1,215 @@
+<%- include('../header') %>
+  <%- include('user-navbar') %>
+
+    <div class="user-dashboard">
+      <div class="user-content">
+
+        <!-- Profile Section -->
+        <div class="profile-info-section">
+          <h1>Welcome Back, <%= name %>
+          </h1>
+          <p>Let’s explore your personalized dashboard</p>
+
+          <ul>
+            <li><strong>Member Since:</strong> Jan 2024</li>
+            <li><strong>Loyalty Points:</strong> 120</li>
+            <li><strong>Last Order:</strong> May 6, 2025</li>
+          </ul>
+        </div>
+
+        <hr class="horizontal" />
+
+        <!-- Product Detail Section -->
+        <div class="pro-detail-container">
+          <h2 class="pro-detail-title">Product Detail</h2>
+
+          <% if (locals.data) { %>
+            <div class="pro-detail-card">
+              <div class="pro-detail-content">
+
+                <!-- Product Image -->
+                <div class="pro-detail-image-section">
+                  <img src="../../public/product_image/<%= data[0].image_url %>" class="pro-detail-image"
+                    alt="Product Image" />
+                  <p class="pro-detail-verified">Thrift verified product &#10004;</p>
+                </div>
+
+                <!-- Product Info -->
+                <div class="pro-detail-details-section">
+                  <h3 class="pro-detail-product-name">
+                    <%= data[0].name %>
+                  </h3>
+                  <p class="pro-detail-description">
+                    <%= data[0].description %>
+                  </p>
+                  <p class="pro-detail-price">
+                    <%= data[0].price %> Rs.
+                  </p>
+
+                  <!-- Feature Icons -->
+                  <div class="pro-detail-icons">
+                    <div class="pro-detail-icon-item">
+                      <i class="bi bi-shield-check"></i>
+                      <span>6 Month Warranty</span>
+                    </div>
+                    <div class="pro-detail-icon-item">
+                      <i class="bi bi-arrow-repeat"></i>
+                      <span>7 Day Replacement</span>
+                    </div>
+                    <div class="pro-detail-icon-item">
+                      <i class="bi bi-truck"></i>
+                      <span>Free Delivery</span>
+                    </div>
+                    <div class="pro-detail-icon-item">
+                      <i class="bi bi-patch-check-fill"></i>
+                      <span>Quality Checked</span>
+                    </div>
+                    <div class="pro-detail-icon-item">
+                      <i class="bi bi-chat-dots"></i>
+                      <span>24x7 Support</span>
+                    </div>
+                  </div>
+                  <!-- Quantity Selector -->
+                  <div class="pro-detail-quantity-section">
+                    <label><strong>Quantity:</strong></label>
+                    <div class="pro-detail-qty-controls">
+                      <!-- <button class="pro-detail-qty-btn" onclick="updateQuantity(-1)">-</button> -->
+                      <input type="number" id="pquantity" value="1" onkeyup="price_calculate(this.value, '<%= data[0].price %>')">
+                      <!-- <span onkeyup="price_calculate(this.value, '<%= data[0].price %>' )" id="quantity" class="pro-detail-qty-value">1</span>
+                      <button class="pro-detail-qty-btn" onclick="updateQuantity(1)">+</button> -->
+                    </div>
+                  </div>
+
+                  <!-- Action Buttons -->
+                  <div class="pro-detail-buttons">
+                    <button class="pro-detail-btn add-to-cart-btn">Add to Cart</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <% } %>
+
+             <!-- User Billing Info -->
+<!-- User Billing Info -->
+<!-- User Billing Info -->
+<div class="pro-detail-bill-wrapper">
+  <p class="pro-detail-note">Bill Info (Edit profile to change address)</p>
+
+  <div class="pro-detail-table">
+    <!-- Header Row -->
+    <div class="pro-detail-row pro-detail-header-row">
+      <div>Name</div>
+      <div>Email ID</div>
+      <div>Shipped Address</div>
+      <div>Final Price</div>
+    </div>
+
+    <!-- User Info Row -->
+    <div class="pro-detail-row">
+      <div><%= name %></div>
+      <div><%= email %></div>
+      <div><%= address %></div>
+      <div class="pro-detail-price-btn-cell">
+        <span id="price"><%= data[0].price %> Rs.</span>
+        <button class="pro-detail-btn pay-now-btn" onclick="showPayPal()">Pay Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- paypal button wrapper -->
+  <div id="paypal-button-wrapper" style="display: none;" class="mt-4">
+    <div id="paypal-button-container"></div>
+  </div>
+
+
+</div>
+
+
+
+        </div>
+
+        <hr class="horizontal" />
+      </div>
+    </div>
+
+  
+
+
+<!-- PayPal SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=AQznlU-tNXOJ_9semHInMcwpz-E3pC_RcKEmdApmG8Av59jrbgXNrDSrqmRNG9kpaPpLM2srvk9cbLHD&currency=USD"></script>
+
+<!-- Custom Script -->
+<script>
+
+  function showPayPal() {
+    document.getElementById("paypal-button-wrapper").style.display = "block";
+  }
+
+  var fp= document.getElementById("price").textContent;
+  var finalAmount=parseInt(fp);
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: finalAmount.toString()
+          }
+        }]
+      });
+    },
+  onApprove: function(data, actions) {
+  return actions.order.capture().then(function(details) {
+    const payerId = details.payer.payer_id;
+    const merchantId = details.purchase_units[0].payee.merchant_id;
+    const createTime = details.create_time;
+    const transactionId = details.purchase_units[0].payments.captures[0].id;
+    const product_quantity = document.getElementById("pquantity").value;
+
+    const postData = {
+      payerid: payerId,
+      merchantid: merchantId,
+      createtime: createTime,
+      transactionid: transactionId,
+      amount: finalAmount.toString(),
+      pqnty: product_quantity,
+      pname: "<%=data[0].name%>",
+      ptype: "<%=data[0].category_id%>",
+      pphoto: "<%=data[0].image_url%>"
+    };
+
+    ///console.log("Sending POST request with data:", postData);
+
+    fetch('/user/success_payment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(postData)
+    })
+    .then(response => {
+      if (response.ok) {
+        alert('Transaction completed by ' + details.payer.name.given_name + '!');
+        return response.json(); // or response.json()
+      } else {
+        throw new Error("Failed to post payment details.");
+      }
+    })
+    .then(data => {
+      // handle server response if needed
+      console.log("Server response:", data);
+      if (data.success) {
+    window.location.href = "/user/success_payment_page"; 
+  }
+    })
+    .catch(error => {
+      console.error("Error:", error);
+    });
+  });
+}
+
+  }).render('#paypal-button-container');
+</script>
+
+    <%- include ('../footer') %>
+    <%- include('../footer-links') %>

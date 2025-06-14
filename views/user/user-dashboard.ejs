@@ -1,0 +1,88 @@
+<%- include('../header') %>
+<%- include('user-navbar') %>
+
+
+
+<div class="user-dashboard">
+
+  <div class="user-content">
+    <!-- Profile Section -->
+     <section class="profile-overview">
+<div class="profile-photo-section">
+    <img src="../../public/profile_image/<%= photo %>" alt="User Photo" class="dashboard-profile-photo">
+  </div>
+  <div class="profile-info-section">
+    
+    <h1>Welcome Back, <%=name%></h1>
+    <p>Let’s explore your personalized dashboard</p>
+
+    <ul>
+      <li><strong>Member Since:</strong> Jan 2024</li>
+      <li><strong>Loyalty Points:</strong> 120</li>
+      <li><strong>Last Order:</strong> May 6, 2025</li>
+    </ul>
+  </div>
+  </section>
+
+<hr class="horizontal" />
+
+    <!-- Dashboard Cards -->
+   <section class="dashboard-cards">
+  <div class="user-card">
+    <i class="bi bi-box-seam"></i>
+    <h3>Orders</h3>
+    <p>5</p>
+  </div>
+  <div class="user-card">
+    <i class="bi bi-clock-history"></i>
+    <h3>Pending</h3>
+    <p>2</p>
+  </div>
+  <div class="user-card">
+    <i class="bi bi-heart"></i>
+    <h3>Wishlist</h3>
+    <p>3 items</p>
+  </div>
+  <div class="user-card">
+    <i class="bi bi-cart3"></i>
+    <h3>Cart</h3>
+    <p>1 item</p>
+  </div>
+  <div class="user-card">
+    <i class="bi bi-wallet2"></i>
+    <h3>Wallet</h3>
+    <p>₹250</p>
+  </div>
+</section>
+
+ <hr class="horizontal" />
+
+  <!--User recent activites and Recommendations -->
+  <section class="admin-grid-two-cols">
+     <div class="admin-recent-activities">
+    <h3 class="admin-section-title">Recent Activities</h3>
+    <ul class="admin-activity-list">
+      <li>✅ Approved return request for Order #2341</li>
+      <li>🛒 Added 3 vintage jackets to inventory</li>
+      <li>👤 Banned flagged user @susUser92</li>
+      <li><a href="#"><button>View All</button></a></li>
+    </ul>
+  </div>
+   
+    <div class="admin-recommendation">
+    <h3 class="admin-section-title">Recommendations</h3>
+    <ul class="admin-recommendation-list">
+      <li>🔥 Top-selling item: "Vintage Denim Jacket" - Restock recommended</li>
+      <li>📊 Weekend sale saw a 20% spike — consider running a flash sale</li>
+      <li>🌞 Add more summer category products</li>
+    </ul>
+    </div>
+  </section>
+  
+  <hr class="horizontal" />
+  </div>
+</div>
+
+
+  <%- include ('../footer') %>
+  <%- include('../footer-links') %>

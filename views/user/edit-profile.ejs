@@ -1,0 +1,50 @@
+<%- include('../header') %>
+<%- include('user-navbar') %>
+
+<div class="edit-profile-container">
+
+  <h2>Edit Your Profile</h2>
+
+  <% if (locals.message) { %>
+    <p class="success-msg"><%= message %></p>
+  <% } %>
+
+  <form action="/user/edit-profile" method="POST" enctype="multipart/form-data" class="edit-profile-form">
+    
+    <!-- Profile Image -->
+    <div class="profile-pic-section">
+      <img src="/public/profile_image/<%= user.photo %>" alt="Profile Photo" class="profile-pic" />
+      <label for="photoInput" class="btn-upload">Change Profile Picture</label>
+      <input type="file" name="photo" id="photoInput" accept="image/*" style="display: none;" />
+    </div>
+
+    <!-- Personal Info -->
+    <div class="personal-info">
+      <label>Name:</label>
+      <input type="text" name="name" value="<%= user.name %>" required />
+
+      <label>Email:</label>
+      <input type="email" name="email" value="<%= user.email %>" readonly />
+
+      <label>Mobile:</label>
+      <input type="text" name="mobile" value="<%= user.mobile %>" required />
+
+      <label>Gender:</label>
+      <select name="gender">
+        <option value="Male" <%= user.gender === 'Male' ? 'selected' : '' %>>Male</option>
+        <option value="Female" <%= user.gender === 'Female' ? 'selected' : '' %>>Female</option>
+        <option value="Other" <%= user.gender === 'Other' ? 'selected' : '' %>>Other</option>
+      </select>
+
+      <label>Address:</label>
+      <textarea name="address" rows="3" required><%= user.address %></textarea>
+
+      <button type="submit">Update Profile</button>
+    </div>
+
+  </form>
+
+</div>
+
+<%- include('../footer') %>
+<%- include('../footer-links') %>

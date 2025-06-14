@@ -1,0 +1,36 @@
+<%- include('../header') %>
+<%- include('user-navbar') %>
+
+
+<div class="payment-container">
+  <h1>Payment Successful <i class="bi bi-check-circle-fill"></i></h1>
+
+  <!-- Success GIF -->
+  <div style="text-align:center; margin: 20px 0;">
+    <img src="../../public/images/gif.gif" alt="Payment Success" style="max-width:200px;">
+  </div>
+
+  <p class="payment-message">Thank you, <strong><%= order.buyer_name %></strong>! Your payment has been processed successfully.</p>
+
+  <h3>Order Details</h3>
+  <div class="order-details">
+  <div class="order-row"><div class="label">Product Name:</div><div class="value"><%- order.product_name %></div></div>
+  <div class="order-row"><div class="label">Product Type:</div><div class="value"><%= order.product_type %></div></div>
+  <div class="order-row"><div class="label">Quantity:</div><div class="value"><%= order.quantity_order %></div></div>
+  <div class="order-row"><div class="label">Amount Paid:</div><div class="value">$<%= order.payed_amount %></div></div>
+  <div class="order-row"><div class="label">Transaction ID:</div><div class="value"><%= order.payment_trans_no %></div></div>
+  <div class="order-row"><div class="label">Payment Date:</div><div class="value"><%= new Date(order.payment_date).toLocaleString('en-US', {year: 'numeric',month: 'long',day: 'numeric',hour: '2-digit',minute: '2-digit', hour12: true}) %></div></div>
+  <div class="order-row"><div class="label">Buyer Email:</div><div class="value"><%= order.buyer_email %></div></div>
+  <div class="order-row"><div class="label">Buyer Address:</div><div class="value"><%= order.buyer_address %></div></div>
+  <div class="order-row"><div class="label">Product Image:</div><div class="value"><img src="../../public/product_image/<%= order.image_url %>" alt="Product Image" style="max-width:150px;"></div></div>
+</div>
+
+
+  <div style="text-align:center; margin-top: 25px;">
+    <a href="/user/user-dashboard"><button class="payment-button">Go to Dashboard</button></a>
+  </div>
+</div>
+
+
+<%- include('../footer') %>
+<%- include('../footer-links') %>
